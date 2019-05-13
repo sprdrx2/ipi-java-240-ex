@@ -1,18 +1,26 @@
 package com.ipiecoles.java.java240;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 
+@PropertySource("classpath:app.properties")
 public class BitcoinService {
 
     private Double rate = null;
 
+    @Value("${ipi.bitcoin_service.cache}")
     private Boolean forceRefresh = false;
 
+    @Autowired
     private WebPageManager webPageManager;
 
-    public void setWebPageManager(WebPageManager webPageManager) {
-        this.webPageManager = webPageManager;
-    }
+    @Value("${ipi.bitcoin_api_url}")
+    private String bitcoinApiUrl;
 
     public void setForceRefresh(Boolean bool)  {
         this.forceRefresh = bool;
@@ -30,7 +38,7 @@ public class BitcoinService {
 
         System.out.println("Récupération du cours du bitcoin sur site distant");
 
-        String apiResponse = this.webPageManager.getPageContents("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=EUR");
+        String apiResponse = this.webPageManager.getPageContents(bitcoinApiUrl);
         apiResponse = apiResponse.replace("{\"EUR\":","");
         apiResponse = apiResponse.replace("}","");
         rate = Double.parseDouble(apiResponse);

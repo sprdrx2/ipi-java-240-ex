@@ -1,23 +1,30 @@
 package com.ipiecoles.java.java240;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import  javax.annotation.Resources;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+@Component
+@PropertySource("classpath:app.properties")
 public class ProduitManager {
 
+    @Value("${ipi.catalog_url}")
+    private String catalogUrl;
+
     private List<Produit> produits = new ArrayList<>();
+    @Autowired
     private WebPageManager webPageManager;
+    @Resource(name = "bitcoinServiceCached")
     private BitcoinService bitcoinService;
-
-    public void setWebPageManager(WebPageManager webPageManager) {
-        this.webPageManager = webPageManager;
-    }
-
-    public void setBitcoinService(BitcoinService bitcoinService) {
-        this.bitcoinService = bitcoinService;
-    }
 
     /**
      * Méthode qui demande les caractéristiques d'un nouveau produit
@@ -61,7 +68,7 @@ public class ProduitManager {
      * @throws IOException
      */
     public void initialiserCatalogue() throws IOException {
-        String catalogue = webPageManager.getPageContentsFromCacheIfExists("https://pjvilloud.github.io/ipi-java-240-cours/catalogue.txt");
+        String catalogue = webPageManager.getPageContentsFromCacheIfExists(catalogUrl);
         int nbProduits = 0;
         for(String line : catalogue.split("\n")){
             String[] elements = line.split(";");
