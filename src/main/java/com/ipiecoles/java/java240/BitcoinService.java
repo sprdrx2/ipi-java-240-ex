@@ -14,6 +14,9 @@ public class BitcoinService {
         this.webPageManager = webPageManager;
     }
 
+    public void setForceRefresh(Boolean bool)  {
+        this.forceRefresh = bool;
+    }
     /**
      * Méthode qui renvoie le cours du Bitcoin
      * @return le cours du bitcoin
