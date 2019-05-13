@@ -1,0 +1,5 @@
+main -> ProduitManager  -> Produit
+                        -> BitcoinService   -> WebPageManager
+                        -> WebPageManager
+
+     -> BitcoinService  -> WebPageManager
