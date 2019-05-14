@@ -26,6 +26,11 @@ public class ProduitManager {
     @Resource(name = "bitcoinServiceCached")
     private BitcoinService bitcoinService;
 
+    public ProduitManager() {
+        System.out.println("instanciation du produit manager");
+    }
+
+
     /**
      * Méthode qui demande les caractéristiques d'un nouveau produit
      * à l'utilisateur et qui l'ajoute au catalogue

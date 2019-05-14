@@ -22,6 +22,10 @@ public class BitcoinService {
     @Value("${ipi.bitcoin_api_url}")
     private String bitcoinApiUrl;
 
+    public BitcoinService() {
+        System.out.println("instanciation du bitcoin service");
+    }
+
     public void setForceRefresh(Boolean bool)  {
         this.forceRefresh = bool;
     }

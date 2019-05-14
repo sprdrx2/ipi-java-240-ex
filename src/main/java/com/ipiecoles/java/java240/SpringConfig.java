@@ -1,5 +1,6 @@
 package com.ipiecoles.java.java240;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
 @Configuration
@@ -7,11 +8,14 @@ import org.springframework.context.annotation.*;
 @PropertySource("classpath:app.properties")
 public class SpringConfig {
 
+        @Value("${ipi.bitcoin_service.cache}")
+        private Boolean bitcoinForceRefresh;
+
         @Bean(name="bitcoinServiceFresh")
         @Scope("singleton")
         public BitcoinService bitcoinServiceFresh() {
             BitcoinService bitcoinService = new BitcoinService();
-            bitcoinService.setForceRefresh(true);
+            bitcoinService.setForceRefresh(bitcoinForceRefresh);
             return bitcoinService;
         }
 

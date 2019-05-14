@@ -14,6 +14,10 @@ public class WebPageManager {
 
     private HashMap<String, String> cacheContent = new HashMap<>();
 
+    public WebPageManager() {
+        System.out.println("instanciation du web page manager");
+    }
+
     /**
      * Fait une requête GET à l'url passée en paramètre
      * @param address URL à contacter
@@ -34,7 +38,7 @@ public class WebPageManager {
             }
         } finally {
             if (br != null) {
-                br.close();
+                 br.close();
             }
         }
         return lines.toString();
