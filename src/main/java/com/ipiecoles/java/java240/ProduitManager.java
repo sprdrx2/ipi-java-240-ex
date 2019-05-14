@@ -23,6 +23,7 @@ public class ProduitManager {
     private List<Produit> produits = new ArrayList<>();
     @Autowired
     private WebPageManager webPageManager;
+
     @Resource(name = "bitcoinServiceCached")
     private BitcoinService bitcoinService;
 
